@@ -2,8 +2,8 @@ use std::time::Duration;
 
 use hex::encode as hex_encode;
 use reqwest::header::{HeaderMap, HeaderName, HeaderValue, CONTENT_TYPE, USER_AGENT};
-use reqwest::Response;
 use reqwest::StatusCode;
+use reqwest::{Proxy, Response};
 use ring::hmac;
 use serde::de;
 use serde::de::DeserializeOwned;
@@ -24,10 +24,21 @@ impl Client {
     /// Returns a client based on the specified host and credentials
     /// Credentials do not need to be specified when using public endpoints
     /// Host is mandatory
-    pub fn new(api_key: Option<String>, secret_key: Option<String>, host: String, timeout: Option<u64>) -> Self {
+    pub fn new(
+        api_key: Option<String>,
+        secret_key: Option<String>,
+        host: String,
+        timeout: Option<u64>,
+        proxy: Option<String>,
+    ) -> Self {
         let mut builder: reqwest::ClientBuilder = reqwest::ClientBuilder::new();
         if let Some(timeout_secs) = timeout {
             builder = builder.timeout(Duration::from_secs(timeout_secs))
+        }
+        if let Some(http_proxy) = proxy {
+            if let Ok(proxy) = Proxy::all(http_proxy) {
+                builder = builder.proxy(proxy);
+            }
         }
         Client {
             // Does it ever make sense for api_key and secret_key to be ""?

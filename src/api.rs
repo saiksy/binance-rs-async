@@ -25,7 +25,13 @@ pub trait Binance: Sized {
 impl Binance for General {
     fn new_with_config(api_key: Option<String>, secret_key: Option<String>, config: &Config) -> General {
         General {
-            client: Client::new(api_key, secret_key, config.rest_api_endpoint.clone(), config.timeout),
+            client: Client::new(
+                api_key,
+                secret_key,
+                config.rest_api_endpoint.clone(),
+                config.timeout,
+                config.http_proxy.clone(),
+            ),
         }
     }
 }
@@ -33,7 +39,13 @@ impl Binance for General {
 impl Binance for Account {
     fn new_with_config(api_key: Option<String>, secret_key: Option<String>, config: &Config) -> Account {
         Account {
-            client: Client::new(api_key, secret_key, config.rest_api_endpoint.clone(), config.timeout),
+            client: Client::new(
+                api_key,
+                secret_key,
+                config.rest_api_endpoint.clone(),
+                config.timeout,
+                config.http_proxy.clone(),
+            ),
             recv_window: config.recv_window,
         }
     }
@@ -43,7 +55,13 @@ impl Binance for Account {
 impl Binance for crate::savings::Savings {
     fn new_with_config(api_key: Option<String>, secret_key: Option<String>, config: &Config) -> Self {
         Self {
-            client: Client::new(api_key, secret_key, config.rest_api_endpoint.clone(), config.timeout),
+            client: Client::new(
+                api_key,
+                secret_key,
+                config.rest_api_endpoint.clone(),
+                config.timeout,
+                config.http_proxy.clone(),
+            ),
             recv_window: config.recv_window,
         }
     }
@@ -52,7 +70,13 @@ impl Binance for crate::savings::Savings {
 impl Binance for Market {
     fn new_with_config(api_key: Option<String>, secret_key: Option<String>, config: &Config) -> Market {
         Market {
-            client: Client::new(api_key, secret_key, config.rest_api_endpoint.clone(), config.timeout),
+            client: Client::new(
+                api_key,
+                secret_key,
+                config.rest_api_endpoint.clone(),
+                config.timeout,
+                config.http_proxy.clone(),
+            ),
             recv_window: config.recv_window,
         }
     }
@@ -61,7 +85,13 @@ impl Binance for Market {
 impl Binance for UserStream {
     fn new_with_config(api_key: Option<String>, secret_key: Option<String>, config: &Config) -> UserStream {
         UserStream {
-            client: Client::new(api_key, secret_key, config.rest_api_endpoint.clone(), config.timeout),
+            client: Client::new(
+                api_key,
+                secret_key,
+                config.rest_api_endpoint.clone(),
+                config.timeout,
+                config.http_proxy.clone(),
+            ),
             recv_window: config.recv_window,
         }
     }
@@ -76,6 +106,7 @@ impl Binance for crate::futures::general::FuturesGeneral {
                 secret_key,
                 config.futures_rest_api_endpoint.clone(),
                 config.timeout,
+                config.http_proxy.clone(),
             ),
         }
     }
@@ -90,6 +121,7 @@ impl Binance for crate::futures::market::FuturesMarket {
                 secret_key,
                 config.futures_rest_api_endpoint.clone(),
                 config.timeout,
+                config.http_proxy.clone(),
             ),
             recv_window: config.recv_window,
         }
@@ -105,6 +137,7 @@ impl Binance for crate::futures::account::FuturesAccount {
                 secret_key,
                 config.futures_rest_api_endpoint.clone(),
                 config.timeout,
+                config.http_proxy.clone(),
             ),
             recv_window: config.recv_window,
         }
@@ -120,6 +153,7 @@ impl Binance for crate::futures::userstream::UserStream {
                 secret_key,
                 config.futures_rest_api_endpoint.clone(),
                 config.timeout,
+                config.http_proxy.clone(),
             ),
             recv_window: config.recv_window,
         }
@@ -130,7 +164,13 @@ impl Binance for crate::futures::userstream::UserStream {
 impl Binance for crate::margin::Margin {
     fn new_with_config(api_key: Option<String>, secret_key: Option<String>, config: &Config) -> Self {
         Self {
-            client: Client::new(api_key, secret_key, config.rest_api_endpoint.clone(), config.timeout),
+            client: Client::new(
+                api_key,
+                secret_key,
+                config.rest_api_endpoint.clone(),
+                config.timeout,
+                config.http_proxy.clone(),
+            ),
             recv_window: config.recv_window,
         }
     }
@@ -140,7 +180,13 @@ impl Binance for crate::margin::Margin {
 impl Binance for crate::wallet::Wallet {
     fn new_with_config(api_key: Option<String>, secret_key: Option<String>, config: &Config) -> Self {
         Self {
-            client: Client::new(api_key, secret_key, config.rest_api_endpoint.clone(), config.timeout),
+            client: Client::new(
+                api_key,
+                secret_key,
+                config.rest_api_endpoint.clone(),
+                config.timeout,
+                config.http_proxy.clone(),
+            ),
             recv_window: config.recv_window,
             binance_us_api: config.binance_us_api,
         }
