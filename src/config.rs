@@ -13,6 +13,7 @@ pub struct Config {
     pub binance_us_api: bool,
 
     pub timeout: Option<u64>,
+    pub http_proxy: Option<String>,
 }
 
 impl Config {
@@ -150,6 +151,11 @@ impl Config {
         self.timeout = Some(timeout);
         self
     }
+
+    pub fn set_proxy(mut self, proxy: String) -> Self {
+        self.http_proxy = Some(proxy);
+        self
+    }
 }
 
 impl Default for Config {
@@ -171,6 +177,7 @@ impl Default for Config {
             binance_us_api: false,
 
             timeout: None,
+            http_proxy: None,
         }
     }
 }
