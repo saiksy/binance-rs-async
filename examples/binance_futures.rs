@@ -115,6 +115,11 @@ async fn market_data() {
         Ok(answer) => info!("Funding: {:?}", answer),
         Err(e) => error!("Error: {:?}", e),
     }
+
+    match market.get_asset_index().await {
+        Ok(answer) => info!("Asset Index: {:?}", answer),
+        Err(e) => error!("Error: {:?}", e),
+    }
 }
 
 #[cfg(feature = "futures_api")]

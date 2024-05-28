@@ -1,7 +1,7 @@
 use crate::client::*;
 use crate::errors::*;
 use crate::futures::rest_model::*;
-use crate::rest_model::{BookTickers, KlineSummaries, KlineSummary, PairAndWindowQuery, PairQuery, SymbolPrice, Tickers};
+use crate::rest_model::{PairAndWindowQuery, PairQuery};
 use crate::util::*;
 use serde_json::Value;
 
@@ -551,5 +551,9 @@ impl FuturesMarket {
         self.client
             .get_d("/fapi/v1/openInterest", Some(PairQuery { symbol: symbol.into() }))
             .await
+    }
+
+    pub async fn get_asset_index(&self) -> Result<Vec<AssetIndexPrice>> {
+        self.client.get_p("/fapi/v1/assetIndex", None).await
     }
 }

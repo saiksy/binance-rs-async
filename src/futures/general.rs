@@ -1,7 +1,6 @@
 use crate::client::*;
 use crate::errors::*;
 use crate::futures::rest_model::*;
-use crate::rest_model::ServerTime;
 
 #[derive(Clone)]
 pub struct FuturesGeneral {

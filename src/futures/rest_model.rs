@@ -276,6 +276,15 @@ pub struct MarkPrice {
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone)]
+#[serde(rename_all = "camelCase")]
+pub struct AssetIndexPrice {
+    pub symbol: String,
+    #[serde(with = "string_or_float")]
+    pub index: f64,
+    pub time: u64,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
 #[serde(untagged)]
 pub enum LiquidationOrders {
     AllLiquidationOrders(Vec<LiquidationOrder>),

@@ -8,7 +8,6 @@ use ring::hmac;
 use serde::de;
 use serde::de::DeserializeOwned;
 
-use crate::errors::error_messages;
 use crate::errors::*;
 use crate::util::{build_request_p, build_signed_request_p};
 
