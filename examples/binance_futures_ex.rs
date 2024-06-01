@@ -3,6 +3,7 @@
 extern crate tracing;
 
 use env_logger::Builder;
+use binance::futures::general::FuturesGeneral;
 
 #[tokio::main]
 async fn main() {
@@ -18,8 +19,13 @@ async fn market_data() {
     use binance::futures::market::*;
     use binance::futures::rest_model::*;
 
+    let config = &Config::default().set_proxy("http://127.0.0.1:18809".to_string());
+    let general = FuturesGeneral::new_with_config(None, None, config);
+    let pong = general.ping().await.unwrap();
+    println!("Ping result {pong}");
     let market: FuturesMarket =
-        Binance::new_with_config(None, None, &Config::default().set_proxy("127.0.0.1:7890".to_string()));
+        Binance::new_with_config(None, None, config);
+
     match market.get_asset_index().await {
         Ok(answer) => info!("Asset Index: {:?}", answer),
         Err(e) => error!("Error: {:?}", e),
