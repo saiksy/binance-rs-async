@@ -80,7 +80,7 @@ struct ChangePositionModeRequest {
 
 impl FuturesAccount {
     /// Get an order
-    pub async fn get_order(&self, order: Option<GetOrderRequest>) -> Result<Transaction> {
+    pub async fn get_order(&self, order: Option<GetOrderRequest>) -> Result<Order> {
         self.client
             .get_signed_p("/fapi/v1/order", order, self.recv_window)
             .await
