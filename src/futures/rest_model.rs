@@ -86,7 +86,7 @@ impl Default for OrderType {
     fn default() -> Self { Self::Market }
 }
 
-#[derive(Debug, Deserialize, Serialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone, PartialEq)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum PositionSide {
     Both,
