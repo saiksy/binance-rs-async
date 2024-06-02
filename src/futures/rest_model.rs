@@ -317,7 +317,7 @@ pub struct OpenInterest {
     pub symbol: String,
 }
 
-#[derive(Debug, Deserialize, Clone)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct Order {
     pub client_order_id: String,
